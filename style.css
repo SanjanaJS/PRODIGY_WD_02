@@ -1,0 +1,769 @@
+/* ================================
+   GLOBAL RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-dark: #080b18;
+    --card-bg: rgba(18, 23, 43, 0.78);
+    --border: rgba(255, 255, 255, 0.09);
+    --text-main: #f4f7ff;
+    --text-muted: #8f98b3;
+    --accent: #7c5cff;
+    --accent-light: #9d86ff;
+    --success: #36e0a0;
+    --warning: #ffca5c;
+    --danger: #ff647c;
+    --blue: #54a8ff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+
+/* ================================
+   ANIMATED BACKGROUND
+================================ */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(124, 92, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 85% 75%, rgba(84, 168, 255, 0.12), transparent 30%),
+        var(--bg-dark);
+}
+
+.glow {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.22;
+    animation: floatGlow 8s ease-in-out infinite alternate;
+}
+
+.glow-one {
+    background: #7c5cff;
+    top: -180px;
+    left: -150px;
+}
+
+.glow-two {
+    background: #247cff;
+    right: -160px;
+    bottom: -180px;
+    animation-delay: 2s;
+}
+
+@keyframes floatGlow {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(50px, 30px);
+    }
+}
+
+.grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+
+    background-size: 45px 45px;
+
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+
+/* ================================
+   MAIN CONTAINER
+================================ */
+
+.app-container {
+    width: min(1050px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 45px 0 30px;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        var(--accent),
+        #4e8cff
+    );
+
+    box-shadow:
+        0 10px 30px rgba(124, 92, 255, 0.3);
+
+    font-size: 22px;
+}
+
+.brand h1 {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.brand p {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+
+    box-shadow: 0 0 10px var(--success);
+}
+
+
+/* ================================
+   STOPWATCH CARD
+================================ */
+
+.stopwatch-card {
+    position: relative;
+
+    padding: 55px 30px 35px;
+
+    border: 1px solid var(--border);
+    border-radius: 28px;
+
+    background: var(--card-bg);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.3);
+
+    text-align: center;
+}
+
+
+/* ================================
+   TIMER RING
+================================ */
+
+.timer-ring {
+    width: 330px;
+    height: 330px;
+
+    margin: 0 auto 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            var(--accent),
+            #4e8cff,
+            #36e0a0,
+            var(--accent)
+        );
+
+    padding: 5px;
+
+    box-shadow:
+        0 0 45px rgba(124, 92, 255, 0.18);
+
+    animation: ringGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes ringGlow {
+    from {
+        box-shadow:
+            0 0 30px rgba(124, 92, 255, 0.15);
+    }
+
+    to {
+        box-shadow:
+            0 0 55px rgba(124, 92, 255, 0.32);
+    }
+}
+
+.ring-inner {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    background: #0d1224;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timer-label {
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.time-display {
+    font-family: "Space Mono", monospace;
+
+    font-size: 48px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.colon {
+    color: var(--accent-light);
+}
+
+.milliseconds {
+    color: var(--accent-light);
+    font-size: 27px;
+}
+
+.timer-subtitle {
+    color: #59627d;
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+
+/* ================================
+   CONTROL BUTTONS
+================================ */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.control-btn {
+    min-width: 125px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 13px 18px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.control-btn:hover {
+    transform: translateY(-3px);
+}
+
+.control-btn:active {
+    transform: scale(0.96);
+}
+
+.start-btn {
+    color: white;
+    background: linear-gradient(135deg, #6e4cff, #8b70ff);
+
+    box-shadow:
+        0 10px 25px rgba(124, 92, 255, 0.25);
+}
+
+.start-btn:hover {
+    box-shadow:
+        0 15px 30px rgba(124, 92, 255, 0.38);
+}
+
+.pause-btn {
+    color: #1b1708;
+    background: var(--warning);
+}
+
+.lap-btn {
+    color: white;
+    background: rgba(84, 168, 255, 0.15);
+    border-color: rgba(84, 168, 255, 0.25);
+}
+
+.lap-btn:hover {
+    background: rgba(84, 168, 255, 0.25);
+}
+
+.reset-btn {
+    color: white;
+    background: rgba(255, 100, 124, 0.12);
+    border-color: rgba(255, 100, 124, 0.22);
+}
+
+.reset-btn:hover {
+    background: rgba(255, 100, 124, 0.22);
+}
+
+
+/* ================================
+   KEYBOARD HINT
+================================ */
+
+.keyboard-hint {
+    margin-top: 22px;
+
+    color: #66708d;
+
+    font-size: 11px;
+}
+
+.keyboard-hint strong {
+    color: #aeb7cf;
+}
+
+
+/* ================================
+   STATISTICS
+================================ */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 18px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: rgba(18, 23, 43, 0.65);
+
+    backdrop-filter: blur(12px);
+
+    transition: transform 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(124, 92, 255, 0.12);
+
+    color: var(--accent-light);
+}
+
+.stat-label {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+.stat-card strong {
+    font-family: "Space Mono", monospace;
+
+    font-size: 17px;
+}
+
+
+/* ================================
+   LAPS CARD
+================================ */
+
+.laps-card {
+    margin-top: 18px;
+
+    padding: 25px;
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
+
+    background: rgba(18, 23, 43, 0.65);
+
+    backdrop-filter: blur(12px);
+}
+
+.laps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.laps-header h2 {
+    font-size: 17px;
+}
+
+.laps-header h2 i {
+    color: var(--accent-light);
+    margin-right: 7px;
+}
+
+.laps-header p {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+#lapBadge {
+    padding: 7px 11px;
+
+    border-radius: 50px;
+
+    background: rgba(124, 92, 255, 0.12);
+
+    color: var(--accent-light);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* ================================
+   EMPTY STATE
+================================ */
+
+.empty-state {
+    text-align: center;
+
+    padding: 35px 20px;
+}
+
+.empty-icon {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    color: #626c88;
+
+    font-size: 20px;
+}
+
+.empty-state h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* ================================
+   LAP LIST
+================================ */
+
+.lap-list {
+    list-style: none;
+
+    max-height: 300px;
+
+    overflow-y: auto;
+}
+
+.lap-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.lap-list::-webkit-scrollbar-thumb {
+    background: #303852;
+    border-radius: 10px;
+}
+
+.lap-item {
+    display: grid;
+
+    grid-template-columns:
+        60px 1fr 100px;
+
+    align-items: center;
+
+    padding: 14px 15px;
+
+    margin-bottom: 8px;
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    animation: lapAppear 0.35s ease;
+}
+
+@keyframes lapAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lap-number {
+    color: var(--accent-light);
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.lap-indicator {
+    height: 5px;
+
+    margin-right: 20px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        var(--accent),
+        var(--blue)
+    );
+}
+
+.lap-time {
+    font-family: "Space Mono", monospace;
+
+    text-align: right;
+
+    font-size: 12px;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+    text-align: center;
+
+    padding: 25px 0 5px;
+
+    color: #626c88;
+
+    font-size: 10px;
+}
+
+footer span {
+    color: var(--accent-light);
+    font-weight: 700;
+}
+
+.footer-note {
+    margin-top: 5px;
+    opacity: 0.6;
+}
+
+
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 700px) {
+
+    .app-container {
+        width: min(100% - 25px, 550px);
+        padding-top: 25px;
+    }
+
+    .app-header {
+        align-items: flex-start;
+    }
+
+    .status {
+        display: none;
+    }
+
+    .brand h1 {
+        font-size: 21px;
+    }
+
+    .timer-ring {
+        width: 280px;
+        height: 280px;
+    }
+
+    .time-display {
+        font-size: 39px;
+    }
+
+    .milliseconds {
+        font-size: 23px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .stopwatch-card {
+        padding: 40px 15px 28px;
+    }
+
+    .timer-ring {
+        width: 245px;
+        height: 245px;
+    }
+
+    .time-display {
+        font-size: 32px;
+    }
+
+    .milliseconds {
+        font-size: 19px;
+    }
+
+    .control-btn {
+        min-width: 105px;
+        padding: 11px 14px;
+    }
+
+    .laps-card {
+        padding: 18px 14px;
+    }
+
+    .lap-item {
+        grid-template-columns:
+            50px 1fr 90px;
+    }
+}

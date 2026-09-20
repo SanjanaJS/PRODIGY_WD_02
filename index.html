@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChronoPulse | Precision Stopwatch</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="background">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+        <div class="grid"></div>
+    </div>
+
+
+    <!-- Main Application -->
+    <main class="app-container">
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-stopwatch"></i>
+                </div>
+
+                <div>
+                    <h1>ChronoPulse</h1>
+                    <p>Precision Time Tracker</p>
+                </div>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                <span id="statusText">Ready</span>
+            </div>
+        </header>
+
+
+        <!-- Stopwatch Card -->
+        <section class="stopwatch-card">
+
+            <div class="timer-ring">
+
+                <div class="ring-inner">
+
+                    <span class="timer-label">ELAPSED TIME</span>
+
+                    <div class="time-display">
+                        <span id="minutes">00</span>
+                        <span class="colon">:</span>
+                        <span id="seconds">00</span>
+                        <span class="milliseconds">.<span id="milliseconds">00</span></span>
+                    </div>
+
+                    <span class="timer-subtitle">MIN : SEC : MS</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Main Controls -->
+            <div class="controls">
+
+                <button id="startBtn" class="control-btn start-btn">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Start</span>
+                </button>
+
+                <button id="pauseBtn" class="control-btn pause-btn">
+                    <i class="fa-solid fa-pause"></i>
+                    <span>Pause</span>
+                </button>
+
+                <button id="lapBtn" class="control-btn lap-btn">
+                    <i class="fa-solid fa-flag"></i>
+                    <span>Lap</span>
+                </button>
+
+                <button id="resetBtn" class="control-btn reset-btn">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>Reset</span>
+                </button>
+
+            </div>
+
+
+            <!-- Keyboard Hint -->
+            <p class="keyboard-hint">
+                <i class="fa-regular fa-keyboard"></i>
+                Tip: Use <strong>Space</strong> to start / pause
+                &nbsp;•&nbsp;
+                <strong>L</strong> for lap
+            </p>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-flag"></i>
+                </div>
+
+                <div>
+                    <span class="stat-label">TOTAL LAPS</span>
+                    <strong id="lapCount">0</strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <div>
+                    <span class="stat-label">BEST LAP</span>
+                    <strong id="bestLap">--:--.--</strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <div>
+                    <span class="stat-label">AVERAGE LAP</span>
+                    <strong id="averageLap">--:--.--</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Lap History -->
+        <section class="laps-card">
+
+            <div class="laps-header">
+
+                <div>
+                    <h2>
+                        <i class="fa-solid fa-list-check"></i>
+                        Lap History
+                    </h2>
+
+                    <p>Your recorded time intervals</p>
+                </div>
+
+                <span id="lapBadge">0 LAPS</span>
+
+            </div>
+
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state">
+
+                <div class="empty-icon">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
+
+                <h3>No laps recorded yet</h3>
+
+                <p>
+                    Start the stopwatch and press
+                    <strong>Lap</strong> to record your intervals.
+                </p>
+
+            </div>
+
+
+            <!-- Lap List -->
+            <ul id="lapList" class="lap-list"></ul>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                Built with
+                <span>HTML</span>
+                •
+                <span>CSS</span>
+                •
+                <span>JavaScript</span>
+            </p>
+
+            <p class="footer-note">
+                ChronoPulse © 2026
+            </p>
+        </footer>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
